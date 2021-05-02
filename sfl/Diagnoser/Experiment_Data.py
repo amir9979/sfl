@@ -9,8 +9,7 @@ class Singleton(type):
         return cls._instances[cls]
 
 
-class Experiment_Data(object):
-    __metaclass__ = Singleton
+class Experiment_Data(metaclass=Singleton):
 
     def __init__(self):
         self.PRIORS = []
