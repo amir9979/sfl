@@ -47,7 +47,7 @@ class MEMORY_POOL1(object):
     def NewChunk(self):
             chunk = CHUNK.CHUNK(self.objectType)
             self.Chunks.append(chunk)
-            for  i in xrange(CHUNK.Size - 1,0,-1):
+            for  i in range(CHUNK.Size - 1,0,-1):
                 self.FreeList.append(chunk.Objects[i])
                 chunk.Objects[i].ClearAllocated()
 

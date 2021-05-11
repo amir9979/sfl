@@ -109,7 +109,7 @@ class EXPERIMENT(object):
         self.ExpParams.NumSteps = self.Real.GetHorizon(self.ExpParams.Accuracy, self.ExpParams.UndiscountedHorizon)
     
         #for (int i = ExpParams.MinDoubles i <= ExpParams.MaxDoubles i++)
-        for i in xrange(self.ExpParams.MinDoubles,self.ExpParams.MaxDoubles,1):
+        for i in range(self.ExpParams.MinDoubles,self.ExpParams.MaxDoubles,1):
         
             self.SearchParams.NumSimulations = 1 << i
             self.SearchParams.NumStartStates = 1 << i
@@ -144,7 +144,7 @@ class EXPERIMENT(object):
         self.SearchParams.MaxDepth = self.Simulator.GetHorizon(self.ExpParams.Accuracy, self.ExpParams.UndiscountedHorizon)
         self.ExpParams.SimSteps = self.Simulator.GetHorizon(self.ExpParams.Accuracy, self.ExpParams.UndiscountedHorizon)
 
-        for  i in xrange( self.ExpParams.MinDoubles  , self.ExpParams.MaxDoubles ):
+        for  i in range( self.ExpParams.MinDoubles  , self.ExpParams.MaxDoubles ):
 
             self.SearchParams.NumSimulations = 2**i
             self.SearchParams.NumStartStates = 2**i

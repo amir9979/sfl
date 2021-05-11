@@ -58,7 +58,7 @@ def mcts_uct(ei, iterations, approach):
     """
     clear_states()
     root = generateState(None, None, ei, approach)
-    for _ in xrange(iterations):
+    for _ in range(iterations):
         uct_iteration(root)
     return root.best_action(c=0)
 

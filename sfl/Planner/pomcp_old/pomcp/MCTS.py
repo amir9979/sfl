@@ -262,7 +262,7 @@ class MCTS(object):
     def AddRave(self,vnode, totalReward):
 
         totalDiscount = 1.0
-        for t in xrange(self.TreeDepth,self.History.Size()):
+        for t in range(self.TreeDepth,self.History.Size()):
             qnode = vnode.Child(self.History[t].Action)
             qnode.AMAF.Addweight(totalReward, totalDiscount)
             totalDiscount = totalDiscount* self.Params.RaveDiscount
@@ -473,7 +473,7 @@ def UnitTestGreedy():
     vnode = mcts.ExpandNode(testSimulator.CreateStartState())
     vnode.Value.Set(1, 0)
     vnode.Child(0).Value.Set(0, 1)
-    for action in xrange(1, numAct):
+    for action in range(1, numAct):
         vnode.Child(action).Value.Set(0, 0)
     x= mcts.GreedyUCB(vnode, False)
     print "x:",x

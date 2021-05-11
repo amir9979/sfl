@@ -18,7 +18,7 @@ class Lrtdp(object):
 
     def lrtdp(self):
         state = self.create_start_state()
-        for _ in xrange(self.iterations):
+        for _ in range(self.iterations):
             if state.isSolved:
                 break
             self.runLrtdpTrial(state)
