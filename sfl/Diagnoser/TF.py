@@ -12,11 +12,11 @@ class TF(object):
     def __init__(self, matrix, error, diagnosis):
         self.activity = list(zip(range(len(matrix)), map(tuple, matrix), error))
         self.diagnosis = diagnosis
-        self.active_components = dict(map(lambda a: (a[0], filter(functools.partial(tuple.__getitem__, a[1]), self.diagnosis)), self.activity))
+        self.active_components = dict(map(lambda a: (a[0], list(filter(functools.partial(tuple.__getitem__, a[1]), self.diagnosis))), self.activity))
         self.max_value = None
 
-    def get_active_components(self):
-        return self.active_components
+    def get_active_components(self, test_id):
+        return self.active_components[test_id]
 
     def set_max_value(self, value=None):
         self.max_value = value
@@ -35,7 +35,7 @@ class TF(object):
         def test_prob(test_id, v, e):
             # if e==0 : h1*h2*h3..., if e==1: 1-h1*h2*h3...
             return e + ((-2.0 * e + 1.0) * reduce(operator.mul,
-                                                   list(map(h_dict[test_id].get, self.get_active_components()[test_id])), 1.0))
+                                                   list(map(h_dict[test_id].get, self.get_active_components(test_id))), 1.0))
         return reduce(operator.mul, list(map(lambda x: test_prob(*x), self.get_activity())), 1.0)
 
     def probabilty_TF(self, h):
