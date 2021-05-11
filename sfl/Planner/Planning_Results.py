@@ -65,9 +65,9 @@ def results_all_planners(planners_dir,outFile,out_med_file):
         merged_results,all_results=result_planner(os.path.join(planners_dir,p),p)
         outLInes=outLInes+merged_results
         all_results_LInes=all_results_LInes+all_results
-    writer=csv.writer(open(out_med_file,"wb"))
+    writer=csv.writer(open(out_med_file,"w"))
     writer.writerows(all_results_LInes)
-    writer=csv.writer(open(outFile,"wb"))
+    writer=csv.writer(open(outFile,"w"))
     writer.writerows(outLInes)
 
 

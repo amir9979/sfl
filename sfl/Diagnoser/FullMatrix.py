@@ -20,7 +20,7 @@ class FullMatrix(object):
     def save_to_csv_file(self, out_file):
         import csv
         lines = [self.probabilities] + list(map(lambda x: x[0] + [x[1]], zip(self.matrix, self.error)))
-        with open(out_file, "wb") as f:
+        with open(out_file, "w") as f:
             writer = csv.writer(f)
             writer.writerows(lines)
 

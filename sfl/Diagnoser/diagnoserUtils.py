@@ -80,7 +80,7 @@ def write_planning_file(out_path,
     lines += [["[Bugs]"]] + [[bugged_components]]
     lines += [["[InitialTests]"]] + [[initial_tests]]
     lines += [["[TestDetails]"]] + full_tests_details
-    with open(out_path, 'wb') as f:
+    with open(out_path, 'w') as f:
         writer = csv.writer(f, delimiter=delimiter)
         writer.writerows(lines)
 
@@ -149,7 +149,7 @@ def write_json_planning_file(out_path, tests_details, bugs=None, initial_tests=N
         initial_tests = list(map(lambda details: details[0], full_tests_details))
     instance['initial_tests'] = initial_tests
     instance.update(kwargs)
-    with open(out_path, "wb") as f:
+    with open(out_path, "w") as f:
         json.dump(instance, f)
 
 def write_json_planning_file_by_ei(out_path, ei, **kwargs):

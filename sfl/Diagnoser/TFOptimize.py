@@ -21,7 +21,7 @@ class TfMemoize(object):
         atexit.register(self.save)
 
     def save(self):
-        with open(MEMOIZE_PATH, "wb") as f:
+        with open(MEMOIZE_PATH, "w") as f:
             json.dump(self.memo, f)
 
     def memoize(self, f):
