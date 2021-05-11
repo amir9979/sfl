@@ -51,11 +51,9 @@ for methodC in ["Nelder-Mead","Powell","CG","BFGS","L-BFGS-B","TNC","COBYLA","SL
         probs.append(-probabilty_TF(res.x))
     probs=[p/sum(probs) for p in probs]
     #print  -probabilty_TF(res.x),res.x,methodC
-    print  probs,methodC
 #exit()
 for methodC in []:#["Newton-CG","dogleg","trust-ncg"]:
     res=scipy.optimize.minimize(probabilty_TF,initialGuess,method=methodC)
-    print methodC ,-probabilty_TF(res.x),res.x
 
 boundsC=tuple(zip(lb,ub))
 for methodC in ["L-BFGS-B","TNC","SLSQP"]:
@@ -65,32 +63,24 @@ for methodC in ["L-BFGS-B","TNC","SLSQP"]:
         probs.append(-probabilty_TF(res.x))
     probs=[p/sum(probs) for p in probs]
     #print  -probabilty_TF(res.x),res.x,methodC
-    print  probs,methodC
 
     #res=scipy.optimize.minimize(probabilty_TF,initialGuess,method=methodC,bounds=boundsC,jac=False)
     #print -probabilty_TF(res.x),res.x,"bound",methodC
 exit()
 res=scipy.optimize.minimize(probabilty_TF,initialGuess,method="TNC",bounds=tuple(zip(lb,ub)),jac=False)
 #res=scipy.optimize.minimize(probabilty_TF,initialGuess,method="SLSQP",jac=False)
-print res.x
-print res["x"]
-print "out" ,-probabilty_TF(res.x)
-print "out" ,-probabilty_TF(initialGuess)
 
 
 exit()
 x0 = [1.3, 0.7, 0.8, 1.9, 1.2]
 res = minimize(rosen, x0, method='Nelder-Mead')
-print res.x
 
 res = minimize(rosen, x0, method='BFGS', jac=rosen_der,options={'gtol': 1e-6, 'disp': True})
-print res.x
 
 fun = lambda x: (x[0] - 1)**2 + (x[1] - 2.5)**2
 
 cons = ({'type': 'ineq', 'fun': lambda x:  x[0] - 2 * x[1] + 2},{'type': 'ineq', 'fun': lambda x: -x[0] - 2 * x[1] + 6},{'type': 'ineq', 'fun': lambda x: -x[0] + 2 * x[1] + 2})
 bnds = ((0, None), (0, None))
 res = minimize(fun, (2, 0), method='SLSQP', bounds=bnds,constraints=cons)
-print res.x
 
 
