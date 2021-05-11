@@ -22,7 +22,7 @@ class Instances_Management(object):
         self.instances = {}
 
     def get_instance(self, initial_tests, error):
-        key = repr(sorted(initial_tests)) + "-" + repr(sorted(list(map(lambda x: x[0], filter(lambda x: x[1] == 1, error.items())))))
+        key = repr(sorted(initial_tests)) + "-" + repr(sorted(list(map(lambda x: x[0], list(filter(lambda x: x[1] == 1, error.items()))))))
         if key not in self.instances:
             self.instances[key] = self.create_instance_from_key(key)
         return self.instances[key]
