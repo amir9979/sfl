@@ -13,12 +13,15 @@ class Diagnosis_Results(object):
         self.error = error
         self.pool = pool
         self.bugs = bugs
-        if bugs is None:
-            experiment_data_bugs = bugs
-            if isinstance(experiment_data_bugs[0], int):
-                self.bugs = experiment_data_bugs
-            else:
-                self.bugs = Experiment_Data().get_id_bugs()
+        experiment_data_bugs = bugs
+        if experiment_data_bugs is None:
+            experiment_data_bugs = Experiment_Data().get_id_bugs()
+        if isinstance(experiment_data_bugs[0], int):
+            self.bugs = experiment_data_bugs
+        else:
+            self.bugs = list(map(int, experiment_data_bugs))
+        if pool is None:
+            self.pool = Experiment_Data().POOL
         self.components = set(reduce(list.__add__, list(map(self.pool.get, self.initial_tests)), []))
         self.metrics = self._calculate_metrics()
         for key, value in self.metrics.items():
