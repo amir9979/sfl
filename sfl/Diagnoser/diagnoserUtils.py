@@ -8,7 +8,7 @@ import csv
 import json
 from functools import reduce
 
-def readPlanningFile(fileName, delimiter=";"):
+def readPlanningFile(fileName, delimiter=";", experiment_type='normal'):
     lines=open(fileName,"r").readlines()
     lines=[x.replace("\n","") for x in lines]
     sections=["[Description]", "[Components names]", "[Priors]","[Bugs]","[InitialTests]","[TestDetails]"]
@@ -36,8 +36,7 @@ def readPlanningFile(fileName, delimiter=";"):
         err=int(err)
         testsPool[ind] = actualTrace
         error[ind] = err
-    Experiment_Data().set_values(priors, bugs, testsPool, components, estimatedTestsPool)
-    return ExperimentInstanceFactory.get_experiment_instance(initials, error)
+    return ExperimentInstanceFactory.get_experiment_instance(initials, error, priors, bugs, testsPool, components, estimatedTestsPool, experiment_type)
 
 
 
