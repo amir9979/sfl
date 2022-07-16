@@ -44,45 +44,34 @@ class Staccato():
                 return
         diagnoses.append(candidate)
 
-        return False
-
     def runStrip(self, M_matrix, e_vector, strip):
         self.calls += 1
         if (self.calls > L):
             return []
         diagnoses = []
-        #process
-        ranking = self.rank(M_matrix, e_vector, strip) #rank components
+        ranking = self.rank(M_matrix, e_vector, strip)
         unstripped_comps = strip.unstripped_comps_array_Func()
         if (unstripped_comps != []):
             for comp in unstripped_comps:
                 if (self.is_in_all_conflicts(M_matrix, e_vector, comp, strip)):
-                    #insert component as a single fault diagnosis
                     diagnoses.append({comp})
-                    #"remove" this component from matrix
                     strip.strip_comp(comp)
-        #generate rest of diagnoses
         i = 0
         while(i < len(ranking)):
-            #make sure component hasn't been striped
             j = ranking[i]
             if (strip.is_comp_stripped(j)):
                 i=i+1
                 continue
-            #strip (if in limits)
             if (self.calls <= L):
                 temp_strip = strip.clone()
                 temp_strip.strip(M_matrix, e_vector, j)
                 diagnoses_tag = self.runStrip(M_matrix, e_vector, temp_strip)
             else:
                 break
-            #scan "tag" diagnoses
             for tag_diag in diagnoses_tag:
                 tag_diag.add(j)
                 self.add_if_not_subsumed(diagnoses, tag_diag)
-            #end inner loop
             i=i+1
-        #end outer loop
         return diagnoses
 
     def run(self, M_matrix,  e_vector):
